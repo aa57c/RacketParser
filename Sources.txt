@@ -1,0 +1,5 @@
+Sources for this project:
+
+Class Textbook -> Programming Language Pragmatics Fourth Edition by Michael L. Scott
+
+format for the lexer/scanner -> https://matt.might.net/articles/lexers-in-racket/

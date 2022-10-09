@@ -1,0 +1,69 @@
+#lang racket
+(require 2htdp/batch-io)
+(require parser-tools/yacc)
+(require parser-tools/lex)
+(require (prefix-in : parser-tools/lex-sre))
+
+
+(define-empty-tokens key(KEY_WORD))
+(define-empty-tokens id(ID))
+(define-empty-tokens int(INT))
+(define-empty-tokens lpar(LPAR))
+(define-empty-tokens rpar(RPAR))
+(define-empty-tokens op(OP))
+(define-empty-tokens end(END))
+(define-empty-tokens ass_op(ASS_OP))
+
+(define calc-lexer
+  (lexer
+   [(:or "write" "read")
+    (cons `(KEY_WORD, (string->symbol lexeme))
+          (calc-lexer input-port))]
+   [(:+ (:or (char-range #\a #\z)(char-range #\A #\Z)))
+    (cons `(ID, (string->symbol lexeme))
+          (calc-lexer input-port))]
+   [(:: (:? #\:) (:+ #\=))
+    (cons `(ASS_OP, (string->symbol lexeme))
+          (calc-lexer input-port))]
+   [#\-
+    (cons `(OP, (string->symbol lexeme))
+          (calc-lexer input-port))]
+   [(:+ (:or #\$ #\$))
+    (cons `(END, (string->symbol lexeme))
+          (calc-lexer input-port))]
+   [#\(
+    (cons `(LPAR)
+          (calc-lexer input-port))]
+   [#\)
+    (cons `(RPAR)
+          (calc-lexer input-port))]
+   [(:: (:? #\-)(:+ (char-range #\0 #\9)))
+        (cons `(INT, (string->number lexeme))
+              (calc-lexer input-port))]
+   [(:or #\+ #\*)
+    (cons `(OP, (string->symbol lexeme))
+          (calc-lexer input-port))]
+   [whitespace
+    (calc-lexer input-port)]
+   [(eof)
+    '()]))
+
+
+
+(calc-lexer(open-input-file "input02.txt"))
+
+;(define parse
+ ; (parser
+  ; (grammar(
+   ;         ((key) 
+               
+   
+  
+
+
+
+
+
+
+
+
