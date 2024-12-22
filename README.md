@@ -1,7 +1,7 @@
 
 # Lexer and Parser for Simple Math Language
 
-This project implements a lexer and parser for a simple math. The lexer tokenizes the input source code, and the parser processes these tokens according to predefined grammar rules. The project is designed to handle a language with basic constructs such as variables, arithmetic operations, and simple statements (e.g., assignment, input/output).
+This project implements a lexer and parser for simple mathematical language. The lexer tokenizes the input source code, and the parser processes these tokens according to predefined grammar rules. The project is designed to handle a language with basic constructs such as variables, arithmetic operations, and simple statements (e.g., assignment, input/output).
 
 ## Features
 - **Lexer**: Tokenizes the input into meaningful components like keywords, operators, identifiers, integers, and parentheses.
